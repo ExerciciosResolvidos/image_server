@@ -1,0 +1,8 @@
+defaults:
+  bucket: er-public-development
+
+test: 
+  bucket: er-public-test
+
+production:
+  bucket: env:S3_BUCKET

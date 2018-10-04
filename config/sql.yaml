@@ -1,0 +1,13 @@
+development:
+  primary: postgresql://exercicios_resolvidos:123456@localhost/exercicios_resolvidos_development?timezone=America/Sao_Paulo&dialect=mysql
+  secondary: postgresql://exercicios_resolvidos:123456@localhost/exercicios_resolvidos_development?timezone=America/Sao_Paulo&dialect=mysql
+
+test:
+  primary: postgresql://exercicios_resolvidos:123456@localhost/exercicios_resolvidos_test?timezone=America/Sao_Paulo&dialect=mysql
+  secondary: postgresql://exercicios_resolvidos:123456@localhost/exercicios_resolvidos_test?timezone=America/Sao_Paulo&dialect=mysql
+  config:
+    logging: false
+
+production:
+  primary: env:SQL_PRIMARY_URL
+  secondary: env:SQL_SECONDARY_URL

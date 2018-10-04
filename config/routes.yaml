@@ -1,0 +1,9 @@
+defaults: 
+  controllersPath: "./controllers/"
+  host: "http://localhost:3000"
+
+test:
+  host: ""
+
+production:
+  host: "env:HOST"

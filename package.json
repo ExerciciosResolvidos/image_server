@@ -1,0 +1,32 @@
+{
+  "name": "image_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node bin/www",
+    "test": "NODE_ENV=test mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.212.1",
+    "body-parser": "^1.18.2",
+    "camelize": "^1.0.0",
+    "co": "^4.6.0",
+    "co-express": "^2.0.0",
+    "env-o-loader": "^1.0.7",
+    "express": "^4.16.3",
+    "filter-params": "^1.0.3",
+    "jimp": "^0.2.28",
+    "morgan": "^1.9.0",
+    "pad": "^2.0.3",
+    "pg": "^7.4.1",
+    "sequelize": "^4.37.3"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha-co": "^1.17.2",
+    "supertest": "^3.0.0"
+  }
+}
