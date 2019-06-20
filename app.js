@@ -53,8 +53,9 @@ app.use((req, res, next) => {
 
   res.end = (...arguments) => {
     // console.log(req.path, res.statusCode, arguments[0])
+    console.log(res.statusCode)
     if (res.statusCode === 200) {
-      const cacheKey = [ cacheDir, res.path ].join("/")
+      const cacheKey = [ cacheDir, req.path ].join("/")
       cacheHelper.put(cacheKey, arguments[0])
     }
     return end(...arguments)
