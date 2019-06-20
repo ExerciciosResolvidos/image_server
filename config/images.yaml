@@ -1,0 +1,6 @@
+defaults:
+  original: "original"
+  sizes:
+    thumb: "100x100"
+    medium: "200x200"
+    default: "300x300"

@@ -1,9 +1,11 @@
 defaults: 
   controllersPath: "./controllers/"
   host: "http://localhost:3000"
+  imgPaths: "/images/:id/:size"
 
 test:
   host: ""
 
 production:
   host: "env:HOST"
+  imgPaths: env:IMAGE_PATHS

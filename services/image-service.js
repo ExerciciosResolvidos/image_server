@@ -5,12 +5,13 @@ const s3 = new AWS.S3()
 
 
 const { bucket } = envLoader("../config/s3.yaml")
+const { original } = envLoader("../config/images.yaml")
 
 module.exports = {
 
   _genkey(id) {
     const partedId = pad(9,id,"0").replace(/(\d\d\d)/g, '/$1')
-    return `pictures${partedId}/original`
+    return `pictures${partedId}/${original}`
   },
 
   getS3UrlById(id) {

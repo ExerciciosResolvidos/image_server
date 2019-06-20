@@ -1,35 +1,31 @@
-const wrap = require("co-express")
+const envLoader = require("env-o-loader")
 const ImageService = require("../services/image-service")
-const _ = require("underscore")
+const cache = require("../helpers/cache")
 const Jimp = require("jimp")
-// const sharp = require("sharp")
+
+const { original, sizes } = envLoader("../config/images.yaml")
 
 module.exports = {
 
-  get: wrap(function*(req, res) { 
-    const { id , size = "300x300" } = req.params
+  get(req, res) {
+    const { path, params: { id , size = "300x300" } } = req
 
-    const [ width , height ] = size.split("x").map(e => parseInt(e))
-    
-    const data = yield ImageService.getS3UrlById(id)
-    
-    /*
-      const resized = yield sharp(data)
-                            .resize(width, height)
-                            .toBuffer()
-    */
-    console.log(data)
-    const resized = yield Jimp.read(data).then(image => {
-      return new Promise((resolve, reject) => {
-        console.log(image)
-        image.contain(width, height)
-             .getBuffer(
-               Jimp.MIME_PNG, 
-               (err, buffer) => err ? reject(err) : resolve(buffer)
-              )
-      })
-    })
+    if (size === original) {
+      ImageService.getS3UrlById(id)
+                  .then(data => res.end(data, "binary"))
+      
+    } else {
+      const [ width , height ] = (sizes[size] || size).split("x").map(e => parseInt(e))
 
-    res.end(resized, 'binary')
-  }),
+      ImageService.getS3UrlById(id)
+        .then(data => Jimp.read(data))
+        .then(image =>
+          new Promise((resolve, reject) =>
+            image.contain(width, height)
+              .getBuffer(Jimp.MIME_PNG, (err, buffer) => err ? reject(err) : resolve(buffer))
+          )
+        )
+        .then(resized => res.end(resized, 'binary'))
+    }
+  }
 }

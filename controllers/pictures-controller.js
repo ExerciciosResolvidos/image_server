@@ -120,7 +120,6 @@ module.exports = {
           links: [
             { rel: "self", href: urlHelpers.picturesGet(picture.id) },
             { rel: "/picture/update", href: urlHelpers.picturesUpdate(picture.id) }
-            
           ]
         })
       ),

@@ -11,3 +11,5 @@ test:
 production:
   primary: env:SQL_PRIMARY_URL
   secondary: env:SQL_SECONDARY_URL
+  config:
+    logging: false
