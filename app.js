@@ -5,6 +5,7 @@ const envLoader = require("env-o-loader")
 
 const routesConf = envLoader("./config/routes.yaml")
 
+
 // helpers
 const RouterHelper = require("./helpers/router-helper")
 const routerHelper = RouterHelper(app, routesConf)
@@ -31,10 +32,14 @@ app.use(express.static(cacheDir))
 routerHelper.get("/api/v1/health", "info#health")
 
 routerHelper.get("/api/v1/pictures", "pictures#list")
-routerHelper.post("/api/v1/pictures", "pictures#create")
+
+if (!routesConf.readOnly) {
+  routerHelper.post("/api/v1/pictures", "pictures#create")
+  routerHelper.put("/api/v1/pictures/:id", "pictures#update")
+  routerHelper.delete("/api/v1/pictures/:id", "pictures#delete")  
+}
+
 routerHelper.get("/api/v1/pictures/:id", "pictures#get")
-routerHelper.put("/api/v1/pictures/:id", "pictures#update")
-routerHelper.delete("/api/v1/pictures/:id", "pictures#delete")
 
 const imagePaths = routesConf.imgPaths.split(",")
 

@@ -2,6 +2,7 @@ defaults:
   controllersPath: "./controllers/"
   host: "http://localhost:3000"
   imgPaths: "/images/:id/:size"
+  readOnly: true
 
 test:
   host: ""
@@ -9,3 +10,4 @@ test:
 production:
   host: "env:HOST"
   imgPaths: env:IMAGE_PATHS
+  readOnly: env:READ_ONLY
